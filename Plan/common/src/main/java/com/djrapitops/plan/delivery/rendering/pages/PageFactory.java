@@ -214,4 +214,11 @@ public class PageFactory {
             throw readFail.getCause();
         }
     }
+
+    public Page queryPage() throws IOException {
+        return new QueryPage(
+                getResource("query.html"),
+                locale.get(), theme.get(), versionChecker.get()
+        );
+    }
 }
