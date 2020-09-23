@@ -64,6 +64,7 @@ public class PlayerPlaceHolders implements Placeholders {
         Formatter<Double> decimals = formatters.decimals();
         Formatter<Long> year = formatters.yearLong();
         Formatter<Long> time = formatters.timeAmount();
+        Formatter<Long> hour = formatters.hourAmount();
 
         placeholders.register("player_banned",
                 player -> player.getValue(PlayerKeys.BANNED)
@@ -132,13 +133,15 @@ public class PlayerPlaceHolders implements Placeholders {
         );
 
         placeholders.register("player_time_active",
-                player -> time.apply(SessionsMutator.forContainer(player)
-                        .toActivePlaytime())
+                player -> time.apply(SessionsMutator.forContainer(player).toActivePlaytime())
+        );
+
+        placeholders.register("player_time_active_hour",
+                player -> hour.apply(SessionsMutator.forContainer(player).toActivePlaytime()).replaceAll("h", " Stunden").replaceAll("s", " Stunden")
         );
 
         placeholders.register("player_time_afk",
-                player -> time.apply(SessionsMutator.forContainer(player)
-                        .toAfkTime())
+                player -> time.apply(SessionsMutator.forContainer(player).toAfkTime())
         );
 
         placeholders.register("player_time_total",
@@ -147,14 +150,11 @@ public class PlayerPlaceHolders implements Placeholders {
         );
 
         placeholders.register("player_time_day",
-                player -> time.apply(SessionsMutator.forContainer(player)
-                        .filterSessionsBetween(dayAgo(), now())
-                        .toPlaytime())
+                player -> time.apply(SessionsMutator.forContainer(player).filterSessionsBetween(dayAgo(), now()).toPlaytime())
         );
 
         placeholders.register("player_time_week",
-                player -> time.apply(SessionsMutator.forContainer(player)
-                        .filterSessionsBetween(weekAgo(), now())
+                player -> time.apply(SessionsMutator.forContainer(player).filterSessionsBetween(weekAgo(), now())
                         .toPlaytime())
         );
 
