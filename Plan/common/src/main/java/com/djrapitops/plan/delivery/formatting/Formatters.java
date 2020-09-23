@@ -46,6 +46,7 @@ public class Formatters {
     private final ISO8601NoClockTZIndependentFormatter iso8601NoClockTZIndependentFormatter;
 
     private final TimeAmountFormatter timeAmountFormatter;
+    private final HourAmountFormatter hourAmountFormatter;
 
     private final DecimalFormatter decimalFormatter;
     private final PercentageFormatter percentageFormatter;
@@ -66,6 +67,7 @@ public class Formatters {
         iso8601NoClockFormatter = new DateHolderFormatter(iso8601NoClockLongFormatter);
 
         timeAmountFormatter = new TimeAmountFormatter(config);
+        hourAmountFormatter = new HourAmountFormatter(config);
 
         decimalFormatter = new DecimalFormatter(config);
         percentageFormatter = new PercentageFormatter(decimalFormatter);
@@ -118,6 +120,10 @@ public class Formatters {
 
     public Formatter<Long> timeAmount() {
         return timeAmountFormatter;
+    }
+
+    public Formatter<Long> hourAmount() {
+        return hourAmountFormatter;
     }
 
     public Formatter<Double> percentage() {
